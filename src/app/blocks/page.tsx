@@ -50,6 +50,7 @@ export default function ExecutionBlock() {
               border: "0.5px solid #ccc",
               padding: "0.5rem",
               width: "fit-content",
+              marginBottom: "1rem",
             }}
           >
             <Block block={block} />

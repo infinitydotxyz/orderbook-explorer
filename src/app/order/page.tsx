@@ -56,6 +56,7 @@ export default function Orderbook() {
               border: "0.5px solid #ccc",
               padding: "0.5rem",
               width: "fit-content",
+              marginBottom: "1rem",
             }}
           >
             <Order orderData={order} style={{ width: "64rem" }}>
