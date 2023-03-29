@@ -4,7 +4,53 @@ import { ZeroAddress, formatEther, formatUnits } from "ethers";
 import OrderProgress from "./order-progress";
 import { OrderData } from "./use-order";
 import { HTMLAttributes } from "react";
+import { useOrderStatus } from "./use-order-status";
 import { ExecutionStatus } from "@infinityxyz/lib-frontend/types/core";
+
+export function OrderStatus({
+  orderStatus,
+}: {
+  orderStatus: ExecutionStatus | null;
+}) {
+  switch (orderStatus?.status) {
+    case "not-found":
+      return <span className="text-gray-500">Not found</span>;
+    case "pending-matching":
+      return <span className="text-gray-500">Pending matching</span>;
+    case "matched-no-matches":
+      return <span className="text-gray-500">Matched, no matches</span>;
+    case "matched-pending-execution":
+      return <span className="text-gray-500">Matched, pending execution</span>;
+    case "matched-inexecutable-offer-weth-too-low":
+      return (
+        <span className="text-gray-500">
+          Matched, inexecutable - weth balance too low
+        </span>
+      );
+    case "matched-inexecutable-offer-weth-allowance-too-low":
+      return (
+        <span className="text-gray-500">
+          Matched, inexecutable - weth allowance too low
+        </span>
+      );
+    case "matched-inexecutable":
+      return (
+        <span className="text-gray-500">Matched, inexecutable - unknown</span>
+      );
+    case "matched-executing-not-included":
+      return (
+        <span className="text-gray-500">
+          Executing, inclusion failed last block
+        </span>
+      );
+    case "matched-executing":
+      return <span className="text-gray-500">Executing in current block</span>;
+    case "matched-executed":
+      return <span className="text-gray-500">Executed</span>;
+    default:
+      return <span className="text-gray-500">Not found</span>;
+  }
+}
 
 export default function Order({
   orderData,
@@ -16,6 +62,8 @@ export default function Order({
   children?: React.ReactNode;
 }) {
   const { order } = orderData;
+  const { orderStatus, refresh, isLoading } = useOrderStatus(orderData.id);
+
   const { etherscanBase } = useChain();
   if (!typeof window) {
     return <div>loading</div>;
@@ -36,6 +84,24 @@ export default function Order({
         <p style={{ color: "#90EE90", display: "inline" }}>
           {orderData.status}
         </p>{" "}
+      </div>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        Execution Status:{" "}
+        <div
+          style={{
+            color: "#90EE90",
+            display: "inline",
+            marginLeft: "0.5rem",
+            marginRight: "0.5rem",
+          }}
+        >
+          {isLoading ? "Loading..." : <OrderStatus orderStatus={orderStatus} />}
+        </div>
+        <div>
+          <button style={{}} onClick={refresh} disabled={isLoading}>
+            Refresh
+          </button>
+        </div>
       </div>
       <div>
         Complication:{" "}
