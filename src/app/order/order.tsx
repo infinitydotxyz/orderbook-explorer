@@ -29,7 +29,13 @@ export default function Order({
   return (
     <div style={style}>
       <div>Order type: {order.isSellOrder ? "Listing" : "Offer"}</div>
-
+      <div>Native Order: {orderData.source === "flow" ? "✅" : "❌"}</div>
+      <div>
+        Status{" "}
+        <p style={{ color: "#90EE90", display: "inline" }}>
+          {orderData.status}
+        </p>{" "}
+      </div>
       <div>
         Complication:{" "}
         <Link

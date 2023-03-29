@@ -43,7 +43,7 @@ export default function OrderMatches({ orderData }: { orderData: OrderData }) {
                     }}
                   >
                     <div>Match ID: {match.matchId}</div>
-                    <div>Is Native: {match.isNative ? "✅" : "❌"}</div>
+                    <div>Native Match: {match.isNative ? "✅" : "❌"}</div>
                     <div>Max Gas Price: {match.maxGasPriceGwei} Gwei</div>
                     <div>
                       Arbitrage: {formatUnits(match.arbitrageWei, "gwei")} Gwei
