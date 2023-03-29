@@ -8,10 +8,12 @@ import { OrderData, useOrder } from "../order/use-order";
 import { useBlocks } from "../blocks/use-blocks";
 import { Block } from "../blocks/block";
 import ToggleButton from "../common/toggle";
+import { useChain } from "../config/use-chain";
 
 export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const { chainName } = useChain();
   const [orders, setOrders] = useState<OrderData[]>([]);
   const { order } = useOrder(searchTerm);
   const { mostRecentBlock, blocks, isPolling, togglePoll, refresh } =
@@ -34,7 +36,10 @@ export default function Dashboard() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h2 style={{ textAlign: "center" }}>Orderbook Dashboard </h2>
+      <h2 style={{ textAlign: "center" }}>
+        {chainName.substring(0, 1).toUpperCase()}
+        {chainName.substring(1)} Orderbook Dashboard{" "}
+      </h2>
       <div
         style={{
           display: "flex",
