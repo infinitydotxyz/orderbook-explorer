@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useChain } from "../config/use-chain";
 import { useMatchingEngineApi } from "../config/use-matching-engine-api";
 import { ExecutionBlock } from "./execution-blocks";
 import { join, normalize } from "path";
@@ -103,6 +102,7 @@ export function useBlocks() {
     },
     isPolling,
     blocks,
+    mostRecentBlock,
     isLoading,
   };
 }

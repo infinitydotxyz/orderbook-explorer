@@ -33,6 +33,7 @@ export default function ExecutionBlock() {
             marginLeft: "0.5rem",
             padding: "0.25rem",
           }}
+          disabled={isPolling}
           onClick={() => {
             refresh();
           }}
