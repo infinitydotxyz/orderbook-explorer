@@ -24,7 +24,7 @@ export default function OrderProgress({
   const percentageElapsed = (elapsedTime / totalDuration) * 100;
 
   return (
-    <div>
+    <div style={{ maxWidth: "30rem" }}>
       <div className="timeline" style={{ border: "1px solid blue" }}>
         <div
           className="timeline-progress"

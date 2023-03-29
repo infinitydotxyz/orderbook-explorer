@@ -1,7 +1,10 @@
 import { formatUnits } from "ethers";
 import { ExecutionBlock } from "./execution-blocks";
+import { useChain } from "../config/use-chain";
+import Link from "next/link";
 
 export function BlockStatus({ block }: { block: ExecutionBlock }) {
+  const { etherscanBase } = useChain();
   switch (block.status) {
     case "skipped": {
       return (
@@ -30,7 +33,6 @@ export function BlockStatus({ block }: { block: ExecutionBlock }) {
             Balance difference:{" "}
             {formatUnits(block.balanceChanges.totalBalanceDiff, "gwei")} Gwei
           </div>
-          <div>Hash {block.txHash}</div>
           <div>Gas usage {block.gasUsed}</div>
         </div>
       );
@@ -43,8 +45,19 @@ export function BlockStatus({ block }: { block: ExecutionBlock }) {
             Balance difference:{" "}
             {formatUnits(block.balanceChanges.totalBalanceDiff, "gwei")} Gwei
           </div>
-          <div>Hash {block.txHash}</div>
           <div>Gas usage {block.gasUsed}</div>
+          <div>
+            Tx{" "}
+            <Link
+              style={{
+                color: "#ADD8E6",
+              }}
+              href={`${etherscanBase}/tx/${block.txHash}`}
+              target="_blank"
+            >
+              {block.txHash}
+            </Link>
+          </div>
         </div>
       );
     }
@@ -53,10 +66,22 @@ export function BlockStatus({ block }: { block: ExecutionBlock }) {
 
 export function Block(params: { block: ExecutionBlock }) {
   const { block } = params;
+  const { etherscanBase } = useChain();
 
   return (
     <div>
-      <h4>Block Number: {params.block.number}</h4>
+      <h4>
+        Block Number:{" "}
+        <Link
+          style={{
+            color: "#ADD8E6",
+          }}
+          href={`${etherscanBase}/block/${params.block.number}`}
+          target="_blank"
+        >
+          {params.block.number}
+        </Link>
+      </h4>
       <div>
         <p>Matches</p>
         <p> Num executable {block.numExecutableMatches}</p>

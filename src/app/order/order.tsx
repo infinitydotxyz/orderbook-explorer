@@ -3,7 +3,8 @@ import { useChain } from "../config/use-chain";
 import { ZeroAddress, formatEther, formatUnits } from "ethers";
 import OrderProgress from "./order-progress";
 import { OrderData } from "./use-order";
-import { FunctionComponent, HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
+import { ExecutionStatus } from "@infinityxyz/lib-frontend/types/core";
 
 export default function Order({
   orderData,
