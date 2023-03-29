@@ -53,7 +53,6 @@ export function useMatches(orderId: string) {
         }
         setIsLoading(false);
         const data = response.data;
-        console.log(JSON.stringify(data, null, 2));
         if ("matches" in data && data.matches && "matches" in data.matches) {
           setMatches(data.matches.matches);
           setNumMatches(data.matches.numMatches);

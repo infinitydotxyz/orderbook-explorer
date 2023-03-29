@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import SearchBar from "./search-bar";
 import { OrderData, useOrder } from "./use-order";
 import Order from "./order";
-import { ChainOBOrder } from "@infinityxyz/lib-frontend/types/core";
 import OrderMatches from "./order-matches";
-import { isAddress } from "ethers";
 
 export default function Orderbook() {
   const [searchTerm, setSearchTerm] = useState("");

@@ -13,6 +13,9 @@ export default function OrderMatches({ orderData }: { orderData: OrderData }) {
       <div>
         <div>Matches ({numMatches})</div>
         <button
+          style={{
+            padding: "0.25rem",
+          }}
           onClick={() => {
             setIsExpanded(!isExpanded);
           }}
