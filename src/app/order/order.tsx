@@ -35,7 +35,9 @@ export function OrderStatus({
       );
     case "matched-inexecutable":
       return (
-        <span className="text-gray-500">Matched, inexecutable - unknown</span>
+        <span className="text-gray-500">
+          Matched, inexecutable - {orderStatus.executionInfo.reason}
+        </span>
       );
     case "matched-executing-not-included":
       return (
@@ -73,11 +75,17 @@ export default function Order({
 
   let { collection, tokens } = order.nfts[0];
 
-  let { tokenId } = tokens[0];
+  let tokenId: string = "";
+  if (tokens[0]) {
+    tokenId = tokens[0].tokenId as string;
+  }
+
+  const orderKind = tokenId ? "Single Token" : "Collection";
 
   return (
     <div style={style}>
       <div>Order type: {order.isSellOrder ? "Listing" : "Offer"}</div>
+      <div>Order kind: {orderKind}</div>
       <div>Native Order: {orderData.source === "flow" ? "✅" : "❌"}</div>
       <div>
         Status{" "}

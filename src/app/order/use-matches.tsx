@@ -53,8 +53,13 @@ export function useMatches(orderId: string) {
         }
         setIsLoading(false);
         const data = response.data;
-        if ("matches" in data && data.matches && "matches" in data.matches) {
-          setMatches(data.matches.matches);
+        if (
+          "matches" in data &&
+          data.matches &&
+          "matches" in data.matches &&
+          data.matches.matches
+        ) {
+          setMatches(data.matches.matches.filter((item: any) => !!item));
           setNumMatches(data.matches.numMatches);
         } else {
           setMatches([]);
